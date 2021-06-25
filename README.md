@@ -4,6 +4,16 @@ Dog command for *nix systems. Because there is a `cat` command, should be a `dog
 
 > This package is purely joke, please do not take it seriously.
 
+```
+➜  ~ dog
+          __
+ |_______/ V`-,
+  }        /~~  Whoof!
+ /_)^ --,r'
+|b      |b
+```
+
+
 ### Installation
 
 #### Requisites
