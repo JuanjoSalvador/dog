@@ -1,5 +1,5 @@
 #ifndef utils
-#define VERSION
-const char* whoof = "Whoof!";
-const char* version = "0.0.1";
+const char* version = "0.0.2";
+char* bark = "Whoof!";
+void render(char* bark);
 #endif
