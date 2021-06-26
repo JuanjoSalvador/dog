@@ -1,24 +1,32 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <getopt.h>
 #include "utils.h"
 #include "dogos.h"
 
 int main(int argc, char *argv[]) {
-
+	
+	char* bark = "Whoof!";
 	int opt;
-	int s;
+	int long_index = 0;
 
 	if (argc < 2) {
 		render(bark);
 	}
 
-	while ((opt = getopt(argc, argv, "bgv::")) != -1) {
+	static struct option long_options[] = {
+        {"version",  no_argument, 0,  'v' },
+        {"who-is-a-good-boy",  no_argument, 0,  'w' }
+    };
+
+	while ((opt = getopt_long(argc, argv, "vbg::", long_options, &long_index)) != -1) {
 			
 		switch (opt) {
 			case 'v': 
-				printf("Dog, v%s\n", version);
+				printf("Dog, v%s. Written by Juanjo Salvador <juanjosalvador(at)netc.eu>\n", version);
 				break;
+
 			case 'b':
 				bark = "Bork!";
 				render(bark);
@@ -27,7 +35,12 @@ int main(int argc, char *argv[]) {
 			case 'g':
 				bark = "Guau!";
 				render(bark);
-				break;					
+				break;	
+
+			case 'w':
+				bark = "Whoof whoof whoof!!";
+				render(bark);
+				break;				
 		}
 
 	}
