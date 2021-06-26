@@ -1,5 +1,9 @@
 #ifndef utils
-const char* version = "0.0.2";
-char* bark = "Whoof!";
+
+// Global version
+const char* version = "0.0.3";
+
+// Functions
 void render(char* bark);
+
 #endif
