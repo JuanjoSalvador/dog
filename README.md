@@ -14,13 +14,19 @@ Dog command for *nix systems. Because there is a `cat` command, should be a `dog
 ```
 
 
-### Installation
+## Installation
+
+### From package (Debian/Ubuntu)
+
+Download the last stable package from releases and install it using `dpkg`.
+
+### From source (other platforms)
 
 #### Requisites
 
 You will need to install at least GCC and Make for your OS.
 
-#### Building
+#### Intructions
 
 Just clone the repository and build it using `make` and GCC.
 
@@ -28,3 +34,7 @@ Just clone the repository and build it using `make` and GCC.
 $ make
 $ sudo make install
 ```
+
+## Trivia
+
+* Dog was written completely using Vim and WSL2.
