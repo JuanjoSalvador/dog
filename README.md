@@ -1,6 +1,6 @@
 # dog
 
-Dog command for *nix systems. Because there is a `cat` command, should be a `dog` command too.
+Dog command for *nix systems. Because there is a `cat` command, should be a `dog` command too. Was written completely using Vim and WSL2, compiled with GCC and developed in one night.
 
 > This package is purely joke, please do not take it seriously.
 
@@ -34,7 +34,3 @@ Just clone the repository and build it using `make` and GCC.
 $ make
 $ sudo make install
 ```
-
-## Trivia
-
-* Dog was written completely using Vim and WSL2.
