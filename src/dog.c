@@ -20,9 +20,9 @@ int main(int argc, char *argv[]) {
 	static struct option long_options[] = {
 		{"file",  required_argument, 0,  'f' },
 		{"message",  required_argument, 0,  'm' },
-        {"version",  no_argument, 0,  'v' },
-        {"who-is-a-good-boy",  no_argument, 0,  'w' }
-    };
+		{"version",  no_argument, 0,  'v' },
+		{"who-is-a-good-boy",  no_argument, 0,  'w' }
+	};
 
 	while ((opt = getopt_long(argc, argv, "vbg::m:f:", long_options, &long_index)) != -1) {
 		switch (opt) {
