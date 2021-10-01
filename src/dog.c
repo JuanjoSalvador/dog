@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <unistd.h>
-#include <getopt.h>
+#include <windows.h>
+#include "getopt.h"
 #include "functions.h"
 #include "dogos.h"
 
@@ -19,7 +19,7 @@ int main(int argc, char *argv[]) {
 	static struct option long_options[] = {
 		{"help", no_argument, 0, 'h'},
 		{"bork", no_argument, 0, 'b'},
-		{"file",  required_argument, 0,  'f' },
+		//{"file",  required_argument, 0,  'f' },
 		{"guau", no_argument, 0, 'g'},
 		{"message",  required_argument, 0,  'm' },
 		{"version",  no_argument, 0,  'v' },
@@ -30,7 +30,8 @@ int main(int argc, char *argv[]) {
 	if (argv[optind] == NULL) {
 		render(bark, true);
 	} else {
-		if ((opt = getopt_long(argc, argv, "hbgm:f::vw", long_options, &long_index)) != -1) {
+		//if ((opt = getopt_long(argc, argv, "hbgm:f::vw", long_options, &long_index)) != -1) {
+		if ((opt = getopt_long(argc, argv, "hbgm::vw", long_options, &long_index)) != -1) {
 			switch (opt) {
 				case 'h':					
 					render(dog_version, false);
@@ -45,7 +46,7 @@ int main(int argc, char *argv[]) {
 					printf("    -b, --bork               Dog goes 'bork'.\n");
 					printf("    -g, --guau               Dog goes 'guau' (spanish version).\n");
 					printf("    -m, --message            Dog will say your message.\n");
-					printf("    -f, --file  [FILE]       Dog will say every line of the specified file.\n");
+					//printf("    -f, --file  [FILE]       Dog will say every line of the specified file.\n");
 					printf("    -v, --version            Prints dog version.\n");
 					printf("    -w, --who-is-a-good-boy  Who's a good boy? You're a good boy!.\n");
 					break;
@@ -55,9 +56,9 @@ int main(int argc, char *argv[]) {
 					render(bark, true);
 					break;
 
-				case 'f':
+				/*case 'f':
 					renderFile(optarg);
-					break;
+					break;*/
 
 				case 'g':
 					bark = "Guau!";
@@ -100,11 +101,11 @@ void render(char* bark, int finish) {
 	}
 }
 
-void renderFile(char* filepath) {
+/*void renderFile(char* filepath) {
 	FILE* fp;
 	char* line = NULL;
 	size_t len = 0;
-	ssize_t read;
+	size_t read;
 
 	fp = fopen(filepath, "r");
 	if (fp == NULL)
@@ -120,7 +121,7 @@ void renderFile(char* filepath) {
     if (line)
         free(line);
     exit(EXIT_SUCCESS);
-}
+}*/
 
 char* paramsToString(int argc, char *argv[]) {
 	if(argc < 1) {

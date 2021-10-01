@@ -1,6 +1,8 @@
 #ifndef functions
 
-#include <unistd.h>
+#include <windows.h>
+
+#define STDOUT_FILENO 0
 
 const char* version = "0.0.4";
 
