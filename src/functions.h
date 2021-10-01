@@ -1,11 +1,9 @@
-#ifndef utils
+#ifndef functions
 
 #include <unistd.h>
 
-// Global version
-const char* version = "0.0.3";
+const char* version = "0.0.4";
 
-// Functions
 void render(char* bark, int finish);
 void renderFile(char* filepath);
 char* paramsToString(int argc, char *argv[]);
