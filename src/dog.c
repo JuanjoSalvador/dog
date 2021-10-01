@@ -10,10 +10,14 @@
 int main(int argc, char *argv[]) {
 	
 	char* bark = "Whoof!";
+	char dog_version[255];
 	int opt;
 	int long_index = 0;
 
+	sprintf(dog_version, "Dog, v%s", version);
+
 	static struct option long_options[] = {
+		{"help", no_argument, 0, 'h'},
 		{"bork", no_argument, 0, 'b'},
 		{"file",  required_argument, 0,  'f' },
 		{"guau", no_argument, 0, 'g'},
@@ -26,8 +30,25 @@ int main(int argc, char *argv[]) {
 	if (argv[optind] == NULL) {
 		render(bark, true);
 	} else {
-		if ((opt = getopt_long(argc, argv, "bgm:f::vw", long_options, &long_index)) != -1) {
+		if ((opt = getopt_long(argc, argv, "hbgm:f::vw", long_options, &long_index)) != -1) {
 			switch (opt) {
+				case 'h':					
+					render(dog_version, false);
+					printf("\n\n");
+
+					printf("USAGE\n\n");
+					printf("    dog [OPTION] [OPTION PARAM]\n\n");
+					printf("EXAMPLE\n\n");
+					printf("    dog --message 'Hello World!'\n\n");
+					printf("AVAILABLE OPTIONS\n\n");
+					printf("    (no option)              Dog goes 'whoof'. Default option.\n");
+					printf("    -b, --bork               Dog goes 'bork'.\n");
+					printf("    -g, --guau               Dog goes 'guau' (spanish version).\n");
+					printf("    -m, --message            Dog will say your message.\n");
+					printf("    -f, --file  [FILE]       Dog will say every line of the specified file.\n");
+					printf("    -v, --version            Prints dog version.\n");
+					printf("    -w, --who-is-a-good-boy  Who's a good boy? You're a good boy!.\n");
+					break;
 
 				case 'b':
 					bark = "Bork!";
