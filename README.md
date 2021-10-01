@@ -1,9 +1,7 @@
 # dog
 
 
-[![Master CI](https://github.com/zerasul/dog/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/zerasul/dog/actions/workflows/ci.yml)
-
-Dog command for *nix systems. Because there is a `cat` command, should be a `dog` command too. Was written completely using Vim and WSL2, compiled with GCC and developed in one night.
+Dog command for Windows systems. Because there is a `cat` command, should be a `dog` command too. Original version was written completely using Vim and WSL2, compiled with GCC and developed in one night, Windows version was made in 15 minutes with VS2019 and StackOverflow.
 
 > This package is purely joke, please do not take it seriously.
 
@@ -16,24 +14,24 @@ Dog command for *nix systems. Because there is a `cat` command, should be a `dog
 |b      |b
 ```
 
+## Windows changes
 
-## Installation
+Since `dog` is using POSIX functions and libs insteaf of standard C libs, I need to replace some of them with Windows version of the libs and workarounds. Everything is working but `--file` option. Currentpy working on it.
 
-### From package (Debian/Ubuntu)
+## Building
 
-Download the last stable package from releases and install it using `dpkg`.
+### Requisites
 
-### From source (other platforms)
+You will need to install at least VisualStudio 2019 Community, but maybe it works with VS2015.
 
-#### Requisites
+### Intructions
 
-You will need to install at least GCC and Make for your OS.
+Open the solution (`dog.sln`) with Visual Studio 2019 and click on *Compile*. Result will be placed on `Release` folder.
 
-#### Intructions
+### Testing it
 
-Just clone the repository and build it using `make` and GCC.
+Open your PowerShell console, go to `Release` or `Debug` folder and run
 
-```shell
-$ make
-$ sudo make install
+```powershell
+> .\dog.exe --message 'It works!'
 ```
