@@ -13,46 +13,50 @@ int main(int argc, char *argv[]) {
 	int opt;
 	int long_index = 0;
 
-	if (argc < 2) {
-		render(bark, true);
-	}
-
 	static struct option long_options[] = {
+		{"bork", no_argument, 0, 'b'},
 		{"file",  required_argument, 0,  'f' },
+		{"guau", no_argument, 0, 'g'},
 		{"message",  required_argument, 0,  'm' },
 		{"version",  no_argument, 0,  'v' },
-		{"who-is-a-good-boy",  no_argument, 0,  'w' }
+		{"who-is-a-good-boy",  no_argument, 0,  'w' },
+		{NULL, 0, NULL, 0}
 	};
 
-	while ((opt = getopt_long(argc, argv, "vbg::m:f:", long_options, &long_index)) != -1) {
-		switch (opt) {
-			case 'v': 
-				printf("Dog, v%s. Written by Juanjo Salvador <juanjosalvador(at)netc.eu>\n", version);
-				break;
+	if (argv[optind] == NULL) {
+		render(bark, true);
+	} else {
+		if ((opt = getopt_long(argc, argv, "bgm:f::vw", long_options, &long_index)) != -1) {
+			switch (opt) {
 
-			case 'b':
-				bark = "Bork!";
-				render(bark, true);
-				break;
+				case 'b':
+					bark = "Bork!";
+					render(bark, true);
+					break;
 
-			case 'f':
-				renderFile(optarg);
-				break;
+				case 'f':
+					renderFile(optarg);
+					break;
 
-			case 'g':
-				bark = "Guau!";
-				render(bark, true);
-				break;
+				case 'g':
+					bark = "Guau!";
+					render(bark, true);
+					break;
 
-			case 'm':
-				bark = optarg;
-				render(bark, true);
-				break;	
+				case 'm':
+					bark = optarg;
+					render(bark, true);
+					break;
 
-			case 'w':
-				bark = "Whoof whoof whoof!!";
-				render(bark, true);
-				break;				
+				case 'v': 
+					printf("Dog, v%s. Written by Juanjo Salvador <juanjosalvador(at)netc.eu>\n", version);
+					break;
+
+				case 'w':
+					bark = "Whoof whoof whoof!!";
+					render(bark, true);
+					break;	
+			}
 		}
 	}
 
