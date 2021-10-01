@@ -5,6 +5,8 @@
 
 Dog command for *nix systems. Because there is a `cat` command, should be a `dog` command too. Was written completely using Vim and WSL2, compiled with GCC and developed in one night.
 
+**For the Work In Progress - Windows version, [check this branch](https://github.com/JuanjoSalvador/dog/tree/wip/windows).**
+
 > This package is purely joke, please do not take it seriously.
 
 ```
