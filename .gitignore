@@ -1,1 +1,8 @@
+.vs/
 bin/
+Release/
+Debug/
+CppProperties.json
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
