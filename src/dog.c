@@ -18,11 +18,12 @@ int main(int argc, char *argv[]) {
 	}
 
 	static struct option long_options[] = {
+		{"message",  required_argument, 0,  'm' },
         {"version",  no_argument, 0,  'v' },
         {"who-is-a-good-boy",  no_argument, 0,  'w' }
     };
 
-	while ((opt = getopt_long(argc, argv, "vbg::", long_options, &long_index)) != -1) {
+	while ((opt = getopt_long(argc, argv, "vbg::m:", long_options, &long_index)) != -1) {
 		switch (opt) {
 			case 'v': 
 				printf("Dog, v%s. Written by Juanjo Salvador <juanjosalvador(at)netc.eu>\n", version);
@@ -35,6 +36,11 @@ int main(int argc, char *argv[]) {
 
 			case 'g':
 				bark = "Guau!";
+				render(bark, true);
+				break;
+
+			case 'm':
+				bark = optarg;
 				render(bark, true);
 				break;	
 
