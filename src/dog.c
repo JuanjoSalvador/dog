@@ -4,7 +4,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <getopt.h>
-#include "utils.h"
+#include "functions.h"
 #include "dogos.h"
 
 int main(int argc, char *argv[]) {
@@ -64,9 +64,9 @@ void render(char* bark, int finish) {
 
 	for (int i = 0; i<5; i++) {
 		if (i != 2) {
-			sprintf(buffer, "%s\n", dog_one[0][i]);
+			sprintf(buffer, "%s\n", dog_one[i]);
 		} else {
-			sprintf(buffer, "%s  %s\n", dog_one[0][i], bark);
+			sprintf(buffer, "%s  %s\n", dog_one[i], bark);
 		}
 		printf("%s", buffer);
 	}
