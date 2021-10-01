@@ -19,9 +19,9 @@ int main(int argc, char *argv[]) {
 
 	static struct option long_options[] = {
 		{"message",  required_argument, 0,  'm' },
-        {"version",  no_argument, 0,  'v' },
-        {"who-is-a-good-boy",  no_argument, 0,  'w' }
-    };
+		{"version",  no_argument, 0,  'v' },
+		{"who-is-a-good-boy",  no_argument, 0,  'w' }
+	};
 
 	while ((opt = getopt_long(argc, argv, "vbg::m:", long_options, &long_index)) != -1) {
 		switch (opt) {
