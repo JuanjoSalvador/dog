@@ -1,5 +1,8 @@
 # dog
 
+
+[![Master CI](https://github.com/zerasul/dog/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/zerasul/dog/actions/workflows/ci.yml)
+
 Dog command for *nix systems. Because there is a `cat` command, should be a `dog` command too. Was written completely using Vim and WSL2, compiled with GCC and developed in one night.
 
 > This package is purely joke, please do not take it seriously.
