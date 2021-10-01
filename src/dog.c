@@ -18,12 +18,13 @@ int main(int argc, char *argv[]) {
 	}
 
 	static struct option long_options[] = {
+		{"file",  required_argument, 0,  'f' },
 		{"message",  required_argument, 0,  'm' },
         {"version",  no_argument, 0,  'v' },
         {"who-is-a-good-boy",  no_argument, 0,  'w' }
     };
 
-	while ((opt = getopt_long(argc, argv, "vbg::m:", long_options, &long_index)) != -1) {
+	while ((opt = getopt_long(argc, argv, "vbg::m:f:", long_options, &long_index)) != -1) {
 		switch (opt) {
 			case 'v': 
 				printf("Dog, v%s. Written by Juanjo Salvador <juanjosalvador(at)netc.eu>\n", version);
@@ -32,6 +33,10 @@ int main(int argc, char *argv[]) {
 			case 'b':
 				bark = "Bork!";
 				render(bark, true);
+				break;
+
+			case 'f':
+				renderFile(optarg);
 				break;
 
 			case 'g':
@@ -51,11 +56,6 @@ int main(int argc, char *argv[]) {
 		}
 	}
 
-    if(argc > 0) {
-		bark = paramsToString(argc, argv);
-		render(bark, true);
-	}
-
 	return 0;
 }
 
@@ -73,6 +73,28 @@ void render(char* bark, int finish) {
 	if(finish == true) {
 		exit(0);
 	}
+}
+
+void renderFile(char* filepath) {
+	FILE* fp;
+	char* line = NULL;
+	size_t len = 0;
+	ssize_t read;
+
+	fp = fopen(filepath, "r");
+	if (fp == NULL)
+        exit(EXIT_FAILURE);
+
+	while ((read = getline(&line, &len, fp)) != -1) {
+		clearScreen();
+		render(line, false);
+		sleep(1);
+    }
+
+    fclose(fp);
+    if (line)
+        free(line);
+    exit(EXIT_SUCCESS);
 }
 
 char* paramsToString(int argc, char *argv[]) {
