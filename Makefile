@@ -7,6 +7,7 @@ main: $(sources)
 .SILENT: install
 
 install: install-dog install-man
+	echo successfully installed dog
 
 install-dog:
 	cp bin/dog /usr/local/bin/dog
@@ -16,4 +17,3 @@ install-man:
 	sudo cp man/dog.1 /usr/local/man/man1/dog.1
 	sudo gzip /usr/local/man/man1/dog.1
 	sudo mandb
-	echo okay
