@@ -2,7 +2,11 @@ sources = src/dog.c src/functions.h src/dogos.h
 bindir = bin
 
 main: $(bindir)
+	mkdir -p $(bindir) 
 	gcc $(sources) -o $(bindir)/dog
+
+$(bindir): $(sources)
+	mkdir -p $(bindir)
 
 .SILENT: install
 
