@@ -87,7 +87,7 @@ int main(int argc, char *argv[]) {
 void render(char* bark, int finish) {
 	char buffer[255];
 
-	for (int i = 0; i<5; i++) {
+	for (int i = 0; i<12; i++) {
 		if (i != 2) {
 			sprintf(buffer, "%s\n", dog_one[i]);
 		} else {
