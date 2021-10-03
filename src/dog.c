@@ -19,7 +19,7 @@ int main(int argc, char *argv[]) {
 	static struct option long_options[] = {
 		{"help", no_argument, 0, 'h'},
 		{"bork", no_argument, 0, 'b'},
-		//{"file",  required_argument, 0,  'f' },
+		{"file",  required_argument, 0,  'f' },
 		{"guau", no_argument, 0, 'g'},
 		{"message",  required_argument, 0,  'm' },
 		{"version",  no_argument, 0,  'v' },
@@ -46,7 +46,7 @@ int main(int argc, char *argv[]) {
 					printf("    -b, --bork               Dog goes 'bork'.\n");
 					printf("    -g, --guau               Dog goes 'guau' (spanish version).\n");
 					printf("    -m, --message            Dog will say your message.\n");
-					//printf("    -f, --file  [FILE]       Dog will say every line of the specified file.\n");
+					printf("    -f, --file  [FILE]       Dog will say every line of the specified file.\n");
 					printf("    -v, --version            Prints dog version.\n");
 					printf("    -w, --who-is-a-good-boy  Who's a good boy? You're a good boy!.\n");
 					break;
@@ -56,9 +56,9 @@ int main(int argc, char *argv[]) {
 					render(bark, true);
 					break;
 
-				/*case 'f':
+				case 'f':
 					renderFile(optarg);
-					break;*/
+					break;
 
 				case 'g':
 					bark = "Guau!";
@@ -101,7 +101,7 @@ void render(char* bark, int finish) {
 	}
 }
 
-/*void renderFile(char* filepath) {
+void renderFile(char* filepath) {
 	FILE* fp;
 	char* line = NULL;
 	size_t len = 0;
@@ -111,17 +111,18 @@ void render(char* bark, int finish) {
 	if (fp == NULL)
         exit(EXIT_FAILURE);
 
-	while ((read = getline(&line, &len, fp)) != -1) {
+	char line[100];
+	while (fgets(line, 100, fp)) {
 		clearScreen();
 		render(line, false);
-		sleep(1);
+		os_sleep(1);
     }
 
     fclose(fp);
     if (line)
         free(line);
     exit(EXIT_SUCCESS);
-}*/
+}
 
 char* paramsToString(int argc, char *argv[]) {
 	if(argc < 1) {
