@@ -1,21 +1,15 @@
 #ifndef dogos
 
-const char dog_one[12][20] = {
+
+const char* dog_one[5] = {
 	"          __",
 	" |_______/ V`-,",	
     "  }        /~~",
 	" /_)^ --,r'",
-	"|b      |b",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
+	"|b      |b"
 };
 
-const char dog_two[12][80] = {
+const char* dog_two[11] = {
 	"      >>                           __,___	",
 	"   >>    >>                       /       `",
 	"    <<                           v     v   O `__",
