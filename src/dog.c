@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -7,14 +8,19 @@
 #include "functions.h"
 #include "dogos.h"
 
+static const uint8_t MAX_SIZE_BARK = 64;
+static const uint8_t MAX_SIZE_VERSION = 24;
+static const uint8_t MAX_SIZE_RENDER = 64;
+
 int main(int argc, char *argv[]) {
-	
-	char* bark = "Whoof!";
-	char dog_version[255];
+
+	char bark[MAX_SIZE_BARK];
+	char dog_version[MAX_SIZE_VERSION];
 	int opt;
 	int long_index = 0;
 
-	sprintf(dog_version, "Dog, v%s", version);
+	snprintf(bark, MAX_SIZE_BARK, "%s", "Whoof!");
+	snprintf(dog_version, MAX_SIZE_VERSION, "Dog, v%s", version);
 
 	static struct option long_options[] = {
 		{"help", no_argument, 0, 'h'},
@@ -52,7 +58,7 @@ int main(int argc, char *argv[]) {
 					break;
 
 				case 'b':
-					bark = "Bork!";
+					snprintf(bark, MAX_SIZE_BARK, "%s", "Bork!");
 					render(bark, true);
 					break;
 
@@ -61,12 +67,12 @@ int main(int argc, char *argv[]) {
 					break;
 
 				case 'g':
-					bark = "Guau!";
+					snprintf(bark, MAX_SIZE_BARK, "%s", "Guau!");
 					render(bark, true);
 					break;
 
 				case 'm':
-					bark = optarg;
+					snprintf(bark, MAX_SIZE_BARK, "%s", optarg);
 					render(bark, true);
 					break;
 
@@ -75,7 +81,7 @@ int main(int argc, char *argv[]) {
 					break;
 
 				case 'w':
-					bark = "Whoof whoof whoof!!";
+					snprintf(bark, MAX_SIZE_BARK, "%s", "Whoof whoof whoof!!");
 					render(bark, true);
 					break;	
 			}
@@ -86,15 +92,15 @@ int main(int argc, char *argv[]) {
 }
 
 void render(char* bark, int finish) {
-	char buffer[255];
+	char buffer[MAX_SIZE_RENDER];
 
 	for (int i = 0; i<5; i++) {
 		if (i != 2) {
-			sprintf(buffer, "%s\n", dog_one[i]);
+			snprintf(buffer, MAX_SIZE_RENDER, "%s", dog_one[i]);
 		} else {
-			sprintf(buffer, "%s  %s\n", dog_one[i], bark);
+			snprintf(buffer, MAX_SIZE_RENDER, "%s  %s", dog_one[i], bark);
 		}
-		printf("%s", buffer);
+		printf("%s\n", buffer);
 	}
 	if(finish == true) {
 		exit(0);
@@ -124,6 +130,17 @@ void renderFile(char* filepath) {
     exit(EXIT_SUCCESS);
 }
 
+// Note: This Function is not used
+//
+// Note: In this function you are allocating dynamic memory multiple times.
+//       You must free this memory, it is like constantly kick the dog, at
+//       some point, the dog will bite you. Also, avoid returning a
+//       dynamically allocated data outside the function, nobody outside know
+//       it is dynamic and must free it.
+//
+// Note: strcpy(), strcat(), sprintf() functions are unsafe (it easy to write
+//       outside the reserved memory using it), it is better to use a safest
+//       functions like strncpy(), stncat() and snprintf().
 char* paramsToString(int argc, char *argv[]) {
 	if(argc < 1) {
 		return "";
@@ -135,10 +152,14 @@ char* paramsToString(int argc, char *argv[]) {
 	if(argc > 1) {
 		for(int i = 2; i < argc; i++) {
 			char* tmp = (char*) malloc(strlen(ret) + strlen(argv[i]) + 1);
+			// You should check if the allocation fails
+			//if (tmp == NULL)
+			//    continue;
 			strcpy(tmp, ret);
 			strcat(tmp, " ");
 			strcat(tmp, argv[i]);
 			strcpy(ret, tmp);
+			//free(tmp); // You must free this in each iteration
 		}
 	}
 

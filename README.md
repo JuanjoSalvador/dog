@@ -3,6 +3,8 @@
 
 Dog command for Windows systems. Because there is a `cat` command, should be a `dog` command too. Original version was written completely using Vim and WSL2, compiled with GCC and developed in one night, Windows version was made in 15 minutes with VS2019 and StackOverflow.
 
+**For the Work In Progress - Windows version, [check this branch](https://github.com/JuanjoSalvador/dog/tree/wip/windows).**
+
 > This package is purely joke, please do not take it seriously.
 
 ```
