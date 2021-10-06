@@ -4,6 +4,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <getopt.h>
+#include <time.h>
 #include "functions.h"
 #include "dogos.h"
 
@@ -23,6 +24,8 @@ int main(int argc, char *argv[]) {
 	int chosen_dog;
 
 	chosen_dog = getDefaultDog();
+
+	srand(time(NULL));
 
 	sprintf(dog_version, "Dog, v%s", version);
 
@@ -59,7 +62,7 @@ int main(int argc, char *argv[]) {
 					printf("    -f, --file  [FILE]       Dog will say every line of the specified file.\n");
 					printf("    -v, --version            Prints dog version.\n");
 					printf("    -w, --who-is-a-good-boy  Who's a good boy? You're a good boy!.\n");
-					printf("    -d, --chosen-dog         Select your favourite dog.\n");
+					printf("    -d, --chosen-dog         Select your favourite dog. \n");
 					break;
 
 				case 'b':
@@ -91,7 +94,13 @@ int main(int argc, char *argv[]) {
 					break;	
 
 				case 'd':
-					chosen_dog_input = getDefaultDogInput(optarg);
+					if (strcmp(optarg, "random") == 0) {
+						chosen_dog_input = rand() % NUM_OF_DOGS;
+					}
+					else {
+						chosen_dog_input = getDefaultDogInput(optarg);
+					}
+
 					if (chosen_dog_input != (chosen_dog)) {
 						chosen_dog = chosen_dog_input;
 						setDefaultDog(chosen_dog_input + 1);
