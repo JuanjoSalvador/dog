@@ -7,14 +7,22 @@
 #include "functions.h"
 #include "dogos.h"
 
+
+static dogo_info dogselection[] = {
+	{&dog_one[0], 5},
+	{&dog_two[0], 11}
+};
+
 int main(int argc, char *argv[]) {
 	
 	char* bark = "Whoof!";
 	char dog_version[255];
 	int opt;
 	int long_index = 0;
-	static int chosen_dog = 0;
 	int chosen_dog_input;
+	int chosen_dog;
+
+	chosen_dog = getDefaultDog();
 
 	sprintf(dog_version, "Dog, v%s", version);
 
@@ -28,11 +36,6 @@ int main(int argc, char *argv[]) {
 		{"who-is-a-good-boy",  no_argument, 0,  'w' },
 		{"chosen-dog",  required_argument, 0,  'd' },
 		{NULL, 0, NULL, 0}
-	};
-
-	static dogo_info dogselection[] = {
-		{&dog_one[0], 5},
-		{&dog_two[0], 11}
 	};
 
 	if (argv[optind] == NULL) {
@@ -88,11 +91,12 @@ int main(int argc, char *argv[]) {
 					break;	
 
 				case 'd':
-					chosen_dog_input = atoi(optarg) - 1;
-					if ((chosen_dog_input >= 0) && (chosen_dog_input < NUM_OF_DOGS))
-					{
+					chosen_dog_input = getDefaultDogInput(optarg);
+					if (chosen_dog_input != (chosen_dog)) {
 						chosen_dog = chosen_dog_input;
+						setDefaultDog(chosen_dog_input + 1);
 					}
+
 					render(bark, &dogselection[chosen_dog], true);
 					break;	
 			}
@@ -100,6 +104,48 @@ int main(int argc, char *argv[]) {
 	}
 
 	return 0;
+}
+
+void setDefaultDog(int newDefaultDog) {
+	FILE* fp;
+	char* line = NULL;
+	size_t len = 0;
+	
+	fp = fopen("/usr/local/man/man1/chosendog.txt", "w+");
+	if (fp == NULL)
+        exit(EXIT_FAILURE);
+	fprintf(fp, "%i", newDefaultDog);
+
+	fclose(fp);
+}
+
+int getDefaultDog(void) {
+	FILE* fp;
+	char* line = NULL;
+	size_t len = 0;
+	int chosen_dog_input;
+	
+	fp = fopen("/usr/local/man/man1/chosendog.txt", "r");
+	if (fp == NULL)
+        exit(EXIT_FAILURE);
+	getline(&line, &len, fp);
+
+	chosen_dog_input = getDefaultDogInput(line);
+	fclose(fp);
+
+	return chosen_dog_input;
+}
+
+int getDefaultDogInput(char *chosen_dog_input_string) {
+	int chosen_dog_input;
+
+	chosen_dog_input = atoi(chosen_dog_input_string) - 1;
+	if ((chosen_dog_input >= 0) && (chosen_dog_input < NUM_OF_DOGS))	{
+		return chosen_dog_input;
+	}
+	else {
+		return 0;	/* first dog is default dog */
+	}
 }
 
 void render(char* bark, dogo_info *dogo_info, int finish) {

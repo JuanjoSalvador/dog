@@ -1,6 +1,5 @@
 #ifndef dogos
 
-
 const char* dog_one[5] = {
 	"          __",
 	" |_______/ V`-,",	
