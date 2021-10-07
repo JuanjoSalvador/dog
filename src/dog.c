@@ -62,7 +62,7 @@ int main(int argc, char *argv[]) {
 					printf("    -f, --file  [FILE]       Dog will say every line of the specified file.\n");
 					printf("    -v, --version            Prints dog version.\n");
 					printf("    -w, --who-is-a-good-boy  Who's a good boy? You're a good boy!.\n");
-					printf("    -d, --chosen-dog         Select your favourite dog. \n");
+					printf("    -d, --chosen-dog         Select your favourite dog. Enter 'random' for random default dog. \n");
 					break;
 
 				case 'b':
