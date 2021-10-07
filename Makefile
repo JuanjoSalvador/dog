@@ -21,3 +21,5 @@ install-man:
 	sudo cp man/dog.1 /usr/local/man/man1/dog.1
 	sudo gzip /usr/local/man/man1/dog.1
 	sudo mandb
+	sudo echo "1" > /usr/local/man/man1/chosendog.txt
+	sudo chmod u=rwx,g=rwx,o=rwx /usr/local/man/man1/chosendog.txt
