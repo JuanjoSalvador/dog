@@ -23,17 +23,3 @@ install-man:
 	sudo mandb
 	sudo echo "1" > /usr/local/man/man1/chosendog.txt
 	sudo chmod u=rwx,g=rwx,o=rwx /usr/local/man/man1/chosendog.txt
-
-
-
-
-
-
-
-
-
-
-
-
-
-
