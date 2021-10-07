@@ -1,4 +1,9 @@
-#ifndef functions
+/* Include Guard */
+
+#ifndef _FUNCTIONS_H_
+#define _FUNCTIONS_H_
+
+/*****************************************************************************/
 
 #include <unistd.h>
 
@@ -25,4 +30,6 @@ void clearScreen()
   write(STDOUT_FILENO, CLEAR_SCREEN_ANSI, 12);
 }
 
-#endif
+/*****************************************************************************/
+
+#endif /* _FUNCTIONS_H_ */
