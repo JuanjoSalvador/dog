@@ -13,6 +13,7 @@ int main(int argc, char *argv[]) {
 	char dog_version[255];
 	int opt;
 	int long_index = 0;
+	int length = 2;
 
 	sprintf(dog_version, "Dog, v%s", version);
 
@@ -24,16 +25,17 @@ int main(int argc, char *argv[]) {
 		{"message",  required_argument, 0,  'm' },
 		{"version",  no_argument, 0,  'v' },
 		{"who-is-a-good-boy",  no_argument, 0,  'w' },
+		{"length",  required_argument, 0,  'l' },
 		{NULL, 0, NULL, 0}
 	};
 
 	if (argv[optind] == NULL) {
-		render(bark, true);
+		render(bark, true, length);
 	} else {
-		if ((opt = getopt_long(argc, argv, "hbgm:f::vw", long_options, &long_index)) != -1) {
+		if ((opt = getopt_long(argc, argv, "hbgm:f::vwl:", long_options, &long_index)) != -1) {
 			switch (opt) {
 				case 'h':					
-					render(dog_version, false);
+					render(dog_version, false, length);
 					printf("\n\n");
 
 					printf("USAGE\n\n");
@@ -48,11 +50,12 @@ int main(int argc, char *argv[]) {
 					printf("    -f, --file  [FILE]       Dog will say every line of the specified file.\n");
 					printf("    -v, --version            Prints dog version.\n");
 					printf("    -w, --who-is-a-good-boy  Who's a good boy? You're a good boy!.\n");
+					printf("    -l, --length [LENGTH}    Set the dog lenth. Default is 2\n");
 					break;
 
 				case 'b':
 					bark = "Bork!";
-					render(bark, true);
+					render(bark, true, length);
 					break;
 
 				case 'f':
@@ -61,12 +64,12 @@ int main(int argc, char *argv[]) {
 
 				case 'g':
 					bark = "Guau!";
-					render(bark, true);
+					render(bark, true, length);
 					break;
 
 				case 'm':
 					bark = optarg;
-					render(bark, true);
+					render(bark, true, length);
 					break;
 
 				case 'v': 
@@ -75,7 +78,11 @@ int main(int argc, char *argv[]) {
 
 				case 'w':
 					bark = "Whoof whoof whoof!!";
-					render(bark, true);
+					render(bark, true, length);
+					break;	
+				case 'l':
+					length = atoi(optarg);
+					render(bark, true, length);
 					break;	
 			}
 		}
@@ -84,14 +91,19 @@ int main(int argc, char *argv[]) {
 	return 0;
 }
 
-void render(char* bark, int finish) {
+void render(char* bark, int finish, int length) {
 	char buffer[255];
 
 	for (int i = 0; i<5; i++) {
+
+		char middle[length + 10];
+		memset(middle, dog_middle[i], length);
+		middle[length] = 0;
+
 		if (i != 2) {
-			sprintf(buffer, "%s\n", dog_one[i]);
+			sprintf(buffer, "%s%s%s\n", dog_bag[i], middle, dog_front[i]);
 		} else {
-			sprintf(buffer, "%s  %s\n", dog_one[i], bark);
+			sprintf(buffer, "%s%s%s  %s\n", dog_bag[i], middle, dog_front[i], bark);
 		}
 		printf("%s", buffer);
 	}
@@ -112,7 +124,7 @@ void renderFile(char* filepath) {
 
 	while ((read = getline(&line, &len, fp)) != -1) {
 		clearScreen();
-		render(line, false);
+		render(line, false, 2);
 		sleep(1);
     }
 
