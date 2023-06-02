@@ -56,11 +56,11 @@ int main(int argc, char *argv[]) {
 					printf("    -f, --file  [FILE]       Dog will say every line of the specified file.\n");
 					printf("    -v, --version            Prints dog version.\n");
 					printf("    -w, --who-is-a-good-boy  Who's a good boy? You're a good boy!.\n");
-					printf("    -l, --length [LENGTH}    Set the dog lenth. Default is 2\n");
+					printf("    -l, --length [LENGTH]    Set the dog lenth. Default is 2\n");
 					break;
 
 				case 'b':
-					bark = "Bork!";
+					strcpy(bark, "Bork!");
 					render(bark, true, length);
 					break;
 
@@ -69,21 +69,21 @@ int main(int argc, char *argv[]) {
 					break;
 
 				case 'g':
-					bark = "Guau!";
+					strcpy(bark, "¡Guau!");
 					render(bark, true, length);
 					break;
 
 				case 'm':
-					bark = optarg;
+					strcpy(bark, optarg);
 					render(bark, true, length);
 					break;
 
 				case 'v': 
-					printf("Dog, v%s. Written by Juanjo Salvador <juanjosalvador(at)netc.eu>\n", version);
+					printf("Dog, v%s. Written by Juanjo Salvador and other dog lovers on GitHub.\n", version);
 					break;
 
 				case 'w':
-					bark = "Whoof whoof whoof!!";
+					strcpy(bark, "Whoof whoof whoof!!");
 					render(bark, true, length);
 					break;	
 				case 'l':
@@ -95,6 +95,12 @@ int main(int argc, char *argv[]) {
 	}
 
 	return 0;
+}
+
+void clearScreen()
+{
+  const char *CLEAR_SCREEN_ANSI = "\e[1;1H\e[2J";
+  write(STDOUT_FILENO, CLEAR_SCREEN_ANSI, 11);
 }
 
 void render(char* bark, int finish, int length) {
@@ -111,7 +117,7 @@ void render(char* bark, int finish, int length) {
 		} else {
 			sprintf(buffer, "%s%s%s  %s\n", dog_bag[i], middle, dog_front[i], bark);
 		}
-		printf("%s\n", buffer);
+		printf("%s", buffer);
 	}
 	if(finish == true) {
 		exit(0);
@@ -140,38 +146,38 @@ void renderFile(char* filepath) {
     exit(EXIT_SUCCESS);
 }
 
-// Note: This Function is not used
-//
-// Note: In this function you are allocating dynamic memory multiple times.
-//       You must free this memory, it is like constantly kick the dog, at
-//       some point, the dog will bite you. Also, avoid returning a
-//       dynamically allocated data outside the function, nobody outside know
-//       it is dynamic and must free it.
-//
-// Note: strcpy(), strcat(), sprintf() functions are unsafe (it easy to write
-//       outside the reserved memory using it), it is better to use a safest
-//       functions like strncpy(), stncat() and snprintf().
-char* paramsToString(int argc, char *argv[]) {
-	if(argc < 1) {
-		return "";
-	}
+// // Note: This Function is not used
+// //
+// // Note: In this function you are allocating dynamic memory multiple times.
+// //       You must free this memory, it is like constantly kick the dog, at
+// //       some point, the dog will bite you. Also, avoid returning a
+// //       dynamically allocated data outside the function, nobody outside know
+// //       it is dynamic and must free it.
+// //
+// // Note: strcpy(), strcat(), sprintf() functions are unsafe (it easy to write
+// //       outside the reserved memory using it), it is better to use a safest
+// //       functions like strncpy(), stncat() and snprintf().
+// char* paramsToString(int argc, char *argv[]) {
+// 	if(argc < 1) {
+// 		return "";
+// 	}
 
-	char* ret = (char*) malloc(strlen(argv[1]));
-	strcpy(ret, argv[1]);
+// 	char* ret = (char*) malloc(strlen(argv[1]));
+// 	strcpy(ret, argv[1]);
 
-	if(argc > 1) {
-		for(int i = 2; i < argc; i++) {
-			char* tmp = (char*) malloc(strlen(ret) + strlen(argv[i]) + 1);
-			// You should check if the allocation fails
-			//if (tmp == NULL)
-			//    continue;
-			strcpy(tmp, ret);
-			strcat(tmp, " ");
-			strcat(tmp, argv[i]);
-			strcpy(ret, tmp);
-			//free(tmp); // You must free this in each iteration
-		}
-	}
+// 	if(argc > 1) {
+// 		for(int i = 2; i < argc; i++) {
+// 			char* tmp = (char*) malloc(strlen(ret) + strlen(argv[i]) + 1);
+// 			// You should check if the allocation fails
+// 			//if (tmp == NULL)
+// 			//    continue;
+// 			strcpy(tmp, ret);
+// 			strcat(tmp, " ");
+// 			strcat(tmp, argv[i]);
+// 			strcpy(ret, tmp);
+// 			//free(tmp); // You must free this in each iteration
+// 		}
+// 	}
 
-	return ret;
-}
+// 	return ret;
+// }
