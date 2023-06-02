@@ -1,4 +1,4 @@
-% DOG(1) dog 0.0.4
+% DOG(1) dog 1.0.0
 % Juanjo Salvador
 % October 2021
 

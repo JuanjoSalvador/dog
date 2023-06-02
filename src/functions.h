@@ -7,7 +7,7 @@
 
 #include <unistd.h>
 
-const char* version = "0.0.4-dev";
+const char* version = "1.0.0";
 
 void render(char* bark, int finish, int length);
 void renderFile(char* filepath);
