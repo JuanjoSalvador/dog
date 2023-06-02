@@ -6,7 +6,7 @@
 dog - your personal dog
 
 # SYNOPSIS
-**dog** [-v] [\--version] [-h] [\--help] [-b] [\--bork] [-g] [\--guau] [-w] [\--who-is-a-good-boy] [-m \<MESSAGE>] [\--message \<MESSAGE>] [-f \<FILE>] [\--file \<FILE>]
+**dog** [-v] [\--version] [-h] [\--help] [-l] [\--length \<LENGTH>] [-b] [\--bork] [-g] [\--guau] [-w] [\--who-is-a-good-boy] [-m \<MESSAGE>] [\--message \<MESSAGE>] [-f \<FILE>] [\--file \<FILE>]
 
 # DESCRIPTION
 **dog** behaves like a trained dog, saying everything you tell it to. Running **dog**  without parameters causes it to say "whoof".
@@ -17,6 +17,9 @@ dog - your personal dog
 
 **-h**, **-\-help**
 : Displays a friendly help message
+
+**-l \<LENGTH>**, **-\-length \<LENGTH>**
+: Set the body length of the dog
 
 **-b**, **-\-bork**
 : **dog** says "bork"
@@ -31,7 +34,7 @@ dog - your personal dog
 : **dog** says out \<MESSAGE>. If \<MESSAGE> is longer than one word (separated by spaces), it's best to wrap it with quotes (" or ')
 
 ## EXAMPLE
-    **dog** --message "Hello World!"
+    dog --message "Hello World!"
 
 
 **-f \<FILE>**, **-\-file \<FILE>**
